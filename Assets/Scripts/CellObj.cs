@@ -100,8 +100,6 @@ public class CellObj : MonoBehaviour {
 			SetLifeColor (0f, 0f, 0f, 0.25f);
 		}
 
-
-
 	}
 
 

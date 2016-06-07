@@ -38,11 +38,9 @@ public class GridObj : MonoBehaviour {
 		SetCoorSys (-8.0f, -3.0f, 0.2f, 0.2f);
 		CreateGird (64, 32);
 
-		CreateRandomGrid (50);
-
+		CreateRandomGrid (25, 16, 8);
 
 		SetRuleVariation (2);
-
 	}
 		
 	// Update is called once per frame
@@ -196,13 +194,13 @@ public class GridObj : MonoBehaviour {
 	}
 
 
-	public void CreateRandomGrid(int frequency)
+	public void CreateRandomGrid(int frequency, int rangeX, int rangeY)
 	{
-		for (int r = 1; r < mRows-1; r++) {
+		for (int r = rangeY; r < mRows-rangeY; r++) {
 
 			List<GameObject> rowCells = GridCells [r];
 
-			for (int c = 1; c < mCols-1; c++) {
+			for (int c = rangeX; c < mCols-rangeX; c++) {
 
 				int value = Random.Range (0, 100);
 				if (value < frequency) {
@@ -221,7 +219,10 @@ public class GridObj : MonoBehaviour {
 	private void SetRuleVariation(int rule)
 	{
 		if (rule == 1) {
-			
+
+			//Conways rule
+			//32/3
+
 			rulesSurvive [0] = 2;
 			rulesSurvive [1] = 3;
 			rulesSurvive [2] = -1;
@@ -230,7 +231,10 @@ public class GridObj : MonoBehaviour {
 			rulesBorn [1] = -1;
 
 		} else if (rule == 2){
-			
+
+			//34 Life
+			//34/34
+
 			rulesSurvive [0] = 3;
 			rulesSurvive [1] = 4;
 			rulesSurvive [2] = -1;
@@ -238,6 +242,24 @@ public class GridObj : MonoBehaviour {
 			rulesBorn [0] = 3;
 			rulesBorn [1] = 4;
 			rulesBorn [2] = -1;
+
+		} else if (rule == 3){
+
+			//Coagulations
+			//235678/378
+
+			rulesSurvive [0] = 2;
+			rulesSurvive [1] = 3;
+			rulesSurvive [2] = 5;
+			rulesSurvive [3] = 6;
+			rulesSurvive [4] = 7;
+			rulesSurvive [5] = 8;
+			rulesSurvive [6] = -1;
+
+			rulesBorn [0] = 3;
+			rulesBorn [1] = 7;
+			rulesBorn [3] = 8;
+			rulesBorn [4] = -1;
 
 		}
 	}
