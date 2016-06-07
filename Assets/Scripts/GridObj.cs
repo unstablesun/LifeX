@@ -17,6 +17,10 @@ public class GridObj : MonoBehaviour {
 	private float mDeltaX;
 	private float mDeltaY;
 
+	const int surroundingCells = 8;
+
+	private int[] rulesSurvive = new int[surroundingCells];
+	private int[] rulesBorn = new int[surroundingCells];
 
 	public static GridObj Instance;
 
@@ -34,13 +38,15 @@ public class GridObj : MonoBehaviour {
 		SetCoorSys (-8.0f, -3.0f, 0.2f, 0.2f);
 		CreateGird (64, 32);
 
-		CreateRandomGrid (25);
+		CreateRandomGrid (50);
+
+
+		SetRuleVariation (2);
 
 	}
 		
 	// Update is called once per frame
 	void Update () {
-	
 
 		ProcessGrid ();
 		FlipGrid ();
@@ -126,19 +132,49 @@ public class GridObj : MonoBehaviour {
 	//public bool GetRuleResult(int state, int fitness)
 	private void ProcessRule(GameObject _cellObj, int fitness)
 	{
-		bool updatedState;
 		CellObj cellObjectScript = _cellObj.GetComponent<CellObj> ();
 
 		bool isAlive = cellObjectScript.GetCurrentSliceIsAlive ();
 
-		if (isAlive == false && fitness == 3)
-			updatedState = true;
-		else if (isAlive == true && (fitness >= 2 && fitness <= 3))
-			updatedState = true;
-		else
-			updatedState = false;
+		bool lifeState = false;
 
-		cellObjectScript.SetOffScreenSliceState (updatedState);
+		//survive
+		if (isAlive == true) {
+
+			for (int i = 0; i < surroundingCells; i++) {
+			
+				int rule = rulesSurvive [i];
+				if (rule == -1) {
+					break;
+				} else {
+					if (fitness == rule) {
+
+						lifeState = true;
+						break;
+					}
+				}
+			}
+		}
+
+		//born
+		if (isAlive == false) {
+
+			for (int i = 0; i < surroundingCells; i++) {
+
+				int rule = rulesBorn [i];
+				if (rule == -1) {
+					break;
+				} else {
+					if (fitness == rule) {
+
+						lifeState = true;
+						break;
+					}
+				}
+			}
+		}
+			
+		cellObjectScript.SetOffScreenSliceState (lifeState);
 	}
 
 
@@ -177,6 +213,32 @@ public class GridObj : MonoBehaviour {
 					cellObjectScript.SetAlive ();
 				}
 			}
+		}
+	}
+
+
+
+	private void SetRuleVariation(int rule)
+	{
+		if (rule == 1) {
+			
+			rulesSurvive [0] = 2;
+			rulesSurvive [1] = 3;
+			rulesSurvive [2] = -1;
+
+			rulesBorn [0] = 3;
+			rulesBorn [1] = -1;
+
+		} else if (rule == 2){
+			
+			rulesSurvive [0] = 3;
+			rulesSurvive [1] = 4;
+			rulesSurvive [2] = -1;
+
+			rulesBorn [0] = 3;
+			rulesBorn [1] = 4;
+			rulesBorn [2] = -1;
+
 		}
 	}
 
