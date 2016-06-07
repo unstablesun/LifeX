@@ -90,6 +90,8 @@ public class CellObj : MonoBehaviour {
 		
 	public void FlipSlices()
 	{
+		_slices [_currentSlice].IsAlive = false;
+
 		ToggleCurrentSlice ();
 
 		if (_slices [_currentSlice].IsAlive) {
@@ -97,6 +99,9 @@ public class CellObj : MonoBehaviour {
 		} else {
 			SetLifeColor (0f, 0f, 0f, 0.25f);
 		}
+
+
+
 	}
 
 

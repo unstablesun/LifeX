@@ -133,7 +133,7 @@ public class GridObj : MonoBehaviour {
 
 		if (isAlive == false && fitness == 3)
 			updatedState = true;
-		else if (isAlive == true && (fitness >= 2 || fitness <= 3))
+		else if (isAlive == true && (fitness >= 2 && fitness <= 3))
 			updatedState = true;
 		else
 			updatedState = false;
@@ -162,11 +162,11 @@ public class GridObj : MonoBehaviour {
 
 	public void CreateRandomGrid(int frequency)
 	{
-		for (int r = 0; r < mRows; r++) {
+		for (int r = 1; r < mRows-1; r++) {
 
 			List<GameObject> rowCells = GridCells [r];
 
-			for (int c = 0; c < mCols; c++) {
+			for (int c = 1; c < mCols-1; c++) {
 
 				int value = Random.Range (0, 100);
 				if (value < frequency) {
