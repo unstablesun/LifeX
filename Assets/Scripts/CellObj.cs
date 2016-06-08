@@ -68,7 +68,7 @@ public class CellObj : MonoBehaviour {
 		_currentSlice = 0;
 
 		_slices [_currentSlice].IsAlive = true;
-		SetLifeColor (1f, 1f, 1f, 1f);
+		SetLifeColor (0.5f, 0f, 1f, 1f);
 	}
 		
 
@@ -95,9 +95,9 @@ public class CellObj : MonoBehaviour {
 		ToggleCurrentSlice ();
 
 		if (_slices [_currentSlice].IsAlive) {
-			SetLifeColor (1f, 1f, 1f, 1f);
+			SetLifeColor (0.5f, 0f, 1f, 1f);
 		} else {
-			SetLifeColor (0f, 0f, 0f, 0.25f);
+			SetLifeColor (0.2f, 0.3f, 0f, 0.25f);
 		}
 
 	}

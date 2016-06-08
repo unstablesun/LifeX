@@ -35,12 +35,12 @@ public class GridObj : MonoBehaviour {
 
 		GridCells = new List<List<GameObject>> ();
 
-		SetCoorSys (-8.0f, -3.0f, 0.2f, 0.2f);
-		CreateGird (64, 32);
+		SetCoorSys (-9.0f, -4.0f, 0.15f, 0.15f);
+		CreateGird (128, 64);
 
-		CreateRandomGrid (25, 16, 8);
+		CreateRandomGrid (25, 4, 4);
 
-		SetRuleVariation (2);
+		SetRuleVariation (1);
 	}
 		
 	// Update is called once per frame
@@ -94,13 +94,13 @@ public class GridObj : MonoBehaviour {
 
 	public void ProcessGrid()
 	{
-		for (int r = 1; r < mRows - 4; r++) {
+		for (int r = 1; r < mRows - 2; r++) {
 
 			List<GameObject> rowA = GridCells [r];
 			List<GameObject> rowB = GridCells [r+1];
 			List<GameObject> rowC = GridCells [r+2];
 
-			for (int c = 1; c < mCols - 4; c++) {
+			for (int c = 1; c < mCols - 2; c++) {
 
 				int fitness = 0; 
 				fitness += GetCellLife (rowB [c - 1]);
