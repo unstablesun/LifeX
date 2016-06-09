@@ -35,10 +35,10 @@ public class GridObj : MonoBehaviour {
 
 		GridCells = new List<List<GameObject>> ();
 
-		SetCoorSys (-9.0f, -4.0f, 0.15f, 0.15f);
-		CreateGird (128, 64);
+		SetCoorSys (-9.0f, -3.7f, 0.09f, 0.09f);
+		CreateGird (200, 106);
 
-		CreateRandomGrid (25, 4, 4);
+		CreateRandomGrid (50, 4, 4);
 
 		SetRuleVariation (1);
 	}
